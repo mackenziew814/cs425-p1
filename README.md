@@ -1,8 +1,8 @@
-# Project X
+# Project 1 - Simple Mail Client
 
-- Name: John Doe
-- Email: johndoe@u.boisestate.edu
-- Class: CS123-001
+- Name: Mackenzie Wright
+- Email: mackenziewright@u.boisestate.edu
+- Class: CS425-001
 
 ## Known Bugs or Issues
 
