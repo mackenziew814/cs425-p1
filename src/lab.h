@@ -4,6 +4,11 @@
 #include <stddef.h>
 #include <sys/types.h>
  
+
+/* ------------------------------------------------------------------ */
+/* Layer 1: pure protocol helpers                                     */
+/* ------------------------------------------------------------------ */
+
 /**
  * @brief Parse the 3-digit status code at the start of a single reply line.
  *
@@ -74,8 +79,7 @@ char *smtp_dot_stuff(const char *body);
  * @return a malloc'd, NUL-terminated string the caller must free(), or
  *         NULL on allocation failure or if from/to is NULL
  */
-char *smtp_build_data(const char *from, const char *to, const char *subject,
-                       const char *body);
+char *smtp_build_data(const char *from, const char *to, const char *subject, const char *body);
  
 /**
  * @brief Check whether a string contains a bare CR or LF.
@@ -89,7 +93,10 @@ char *smtp_build_data(const char *from, const char *to, const char *subject,
  */
 int smtp_contains_crlf(const char *s);
  
- 
+/* ------------------------------------------------------------------ */
+/* Layer 2: the session, over a pluggable transport                   */
+/* ------------------------------------------------------------------ */ 
+
 /**
  * @brief Read callback used by the transport.
  *
@@ -212,6 +219,9 @@ typedef struct {
  */
 smtp_result_t smtp_send_mail(smtp_transport_t *t, const char *helo_host, const char *from, const char *to, const char *subject, const char *body);
  
+/* ------------------------------------------------------------------ */
+/* Layer 3: the socket transport                                      */
+/* ------------------------------------------------------------------ */
  
 /**
  * @brief Resolve host/port and connect a TCP socket to it.

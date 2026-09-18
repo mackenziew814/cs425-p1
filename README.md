@@ -25,5 +25,8 @@ have been missed. Much of my time spent on this project was checking the specifi
 and expected response for each functionality.
 
 ## Design
-
-Design section should explain the three layer split from Task 2 and why it is there
+The protocol is split into three sections because we can't create unit tests that work with a 
+live mail server. This means our logic must not use/touch a socket in order for us to write
+our unit tests. To test functionality, I used a fake server to test connections. I split the 
+protocol up into three section; pure protocol helpers, the session, and the socket transport. 
+Pure protocol helpers are simply functions that take in strings and return either strings or status codes. There's absolutely no I/O present here and is responsible for parsing reply lines, dot stuffing a body, and building payload. The second section, the session, is essentially used to monitor and run the whole session. Its functionality includes reading in replies, writing, sending commands, and checking codes. This is done through a pair of read and write function pointers. The last section is responsible for overseeing the socket transport. It generates thin wrappers that satisfy the callbacks created in the session. 
