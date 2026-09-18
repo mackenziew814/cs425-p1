@@ -22,7 +22,7 @@ int smtp_parse_reply_code(const char *line, size_t len);
  * @brief Decide whether a single reply line is the *last* line of a
  * (possibly multi-line) reply.
  *
- * Per RFC 5321 4.2.1, a non-final line has a '-' immediately after the
+ * A non-final line has a '-' immediately after the
  * 3-digit code; a final line has a space there (or nothing at all, i.e.
  * the line is exactly 3 characters).
  *
@@ -47,7 +47,7 @@ int smtp_reply_is_final(const char *line, size_t len);
 char *smtp_build_command(const char *cmd, const char *arg);
  
 /**
- * @brief Dot-stuff a message body per RFC 5321 4.5.2.
+ * @brief Dot-stuff a message body
  *
  * Splits on '\n' (accepting bare LF or CRLF input), doubles any line
  * that begins with '.', and joins everything back together with CRLF
